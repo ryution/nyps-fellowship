@@ -192,9 +192,9 @@
       .sidebar-nav a { border: none; padding: 0.3rem 0; }
       .home-grid { grid-template-columns: 1fr; gap: 2rem; }
       .faculty-grid { grid-template-columns: 1fr; }
-      .faculty-card { display: flex; flex-direction: row; }
-      .faculty-card-photo { width: 150px; min-width: 150px; aspect-ratio: auto; height: 220px; flex-shrink: 0; }
-      .faculty-card-body { flex: 1; padding: 1.25rem; }
+      .faculty-card { display: block; }
+      .faculty-card-photo { aspect-ratio: 4/3; height: auto; width: 100%; min-width: unset; }
+      .faculty-card-body { padding: 1.25rem 1.5rem; }
       #home .home-hero { padding: 3.5rem 1.25rem 3rem; }
       .home-body { padding: 3rem 1.25rem; }
       .home-info-strip { gap: 2rem; padding: 2rem 1.5rem; }
@@ -325,7 +325,8 @@
         <hr />
       </div>
       <div id="sec-team">
-        <h2>Our Team</h2>
+        <h2>Meet the Faculty</h2>
+        <p style="margin-top:0.25rem;margin-bottom:0;">The scholars and mentors helping guide students through the Fellowship.</p>
         <div class="faculty-grid">
           <div class="faculty-card">
             <div class="faculty-card-photo">
@@ -339,7 +340,7 @@
           </div>
           <div class="faculty-card">
             <div class="faculty-card-photo">
-              <div class="faculty-card-placeholder">CW</div>
+              <img src="cole.jpg" alt="Cole Whetstone" />
             </div>
             <div class="faculty-card-body">
               <div class="fc-name">Cole Whetstone</div>
