@@ -202,36 +202,36 @@
       <li id="nav-about" class="active">
         <span onclick="showPage('about')">About</span>
         <div class="dropdown">
-          <a onclick="showPage('about')">About the Fellowship</a>
-          <a onclick="showPage('about')">Vision &amp; Mission</a>
-          <a onclick="showPage('about')">Our Team</a>
-          <a onclick="showPage('about')">Contact</a>
+          <a onclick="showPage('about', 'sec-about')">About the Fellowship</a>
+          <a onclick="showPage('about', 'sec-mission')">Vision &amp; Mission</a>
+          <a onclick="showPage('about', 'sec-team')">Our Team</a>
+          <a onclick="showPage('about', 'sec-contact')">Contact</a>
         </div>
       </li>
       <li id="nav-academics">
         <span onclick="showPage('academics')">Academics</span>
         <div class="dropdown">
-          <a onclick="showPage('academics')">Our Program</a>
-          <a onclick="showPage('academics')">Core Curriculum</a>
-          <a onclick="showPage('academics')">Seminar Structure</a>
+          <a onclick="showPage('academics', 'sec-program')">Our Program</a>
+          <a onclick="showPage('academics', 'sec-curriculum')">Core Curriculum</a>
+          <a onclick="showPage('academics', 'sec-seminar')">Seminar Structure</a>
         </div>
       </li>
       <li id="nav-apply">
         <span onclick="showPage('apply')">How to Apply</span>
         <div class="dropdown">
-          <a onclick="showPage('apply')">How to Apply</a>
-          <a onclick="showPage('apply')">Deadlines</a>
-          <a onclick="showPage('apply')">Eligibility</a>
-          <a onclick="showPage('apply')">Required Components</a>
-          <a onclick="showPage('apply')">Admissions Questions</a>
+          <a onclick="showPage('apply', 'sec-how')">How to Apply</a>
+          <a onclick="showPage('apply', 'sec-deadlines')">Deadlines</a>
+          <a onclick="showPage('apply', 'sec-eligibility')">Eligibility</a>
+          <a onclick="showPage('apply', 'sec-components')">Required Components</a>
+          <a onclick="showPage('apply', 'sec-admissions-q')">Admissions Questions</a>
         </div>
       </li>
       <li id="nav-tuition">
         <span onclick="showPage('tuition')">Tuition &amp; Aid</span>
         <div class="dropdown">
-          <a onclick="showPage('tuition')">Tuition</a>
-          <a onclick="showPage('tuition')">Need-Based Financial Aid</a>
-          <a onclick="showPage('tuition')">Transportation Stipend</a>
+          <a onclick="showPage('tuition', 'sec-tuition')">Tuition</a>
+          <a onclick="showPage('tuition', 'sec-aid')">Need-Based Financial Aid</a>
+          <a onclick="showPage('tuition', 'sec-stipend')">Transportation Stipend</a>
         </div>
       </li>
       <li id="nav-faq"><span onclick="showPage('faq')">FAQ</span></li>
@@ -583,13 +583,18 @@
 </footer>
 
 <script>
-  function showPage(id) {
+  function showPage(id, sectionId) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.querySelectorAll('.primary-nav > ul > li').forEach(li => li.classList.remove('active'));
     const navEl = document.getElementById('nav-' + id);
     if (navEl) navEl.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (sectionId) {
+      window.scrollTo({ top: 0 });
+      requestAnimationFrame(() => requestAnimationFrame(() => scrollToId(sectionId)));
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
   function scrollToId(id) {
