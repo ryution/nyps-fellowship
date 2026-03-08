@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Academy Fellowship | New York Philosophical Society</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #0e2240;
+      --navy-mid:  #1a3560;
+      --navy-lt:   #2a4a7f;
+      --gold:      #c9a84c;
+      --gold-lt:   #e0c070;
+      --cream:     #faf8f3;
+      --warm:      #f3f0e8;
+      --ink:       #111827;
+      --slate:     #4b5563;
+      --muted:     #9ca3af;
+      --border:    #ddd8cc;
+      --serif:     'EB Garamond', Georgia, serif;
+      --serif2:    'Source Serif 4', Georgia, serif;
+      --sans:      'DM Sans', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--ink); line-height: 1.6; overflow-x: hidden; }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    .site-header { background: var(--cream); border-bottom: 3px solid var(--navy); }
+    .header-top { padding: 1.4rem 3rem 0.8rem; display: flex; align-items: flex-end; gap: 1rem; }
+    .site-title { font-family: var(--serif); font-size: 2.2rem; font-weight: 400; color: var(--navy); letter-spacing: -0.01em; cursor: pointer; }
+    .site-title:hover { color: var(--navy-lt); }
+
+    .primary-nav { background: var(--cream); border-top: 1px solid var(--border); }
+    .primary-nav ul { display: flex; list-style: none; padding: 0 3rem; gap: 0; }
+    .primary-nav > ul > li { position: relative; }
+    .primary-nav > ul > li > a,
+    .primary-nav > ul > li > span {
+      display: block; padding: 0.75rem 1.3rem; font-family: var(--sans); font-size: 0.88rem; font-weight: 500;
+      color: var(--ink); cursor: pointer; transition: color 0.15s; border-bottom: 3px solid transparent; margin-bottom: -3px;
+    }
+    .primary-nav > ul > li > a:hover,
+    .primary-nav > ul > li > span:hover,
+    .primary-nav > ul > li.active > a,
+    .primary-nav > ul > li.active > span { color: var(--navy-lt); border-bottom-color: var(--navy-lt); }
+
+    .dropdown {
+      display: none; position: absolute; top: 100%; left: 0; z-index: 200;
+      background: var(--navy); min-width: 200px; padding: 1.5rem 0;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
+    .primary-nav > ul > li:hover .dropdown { display: block; }
+    .dropdown a {
+      display: block; padding: 0.55rem 1.5rem; font-family: var(--sans); font-size: 0.85rem;
+      color: rgba(255,255,255,0.8); border-bottom: 1px solid rgba(255,255,255,0.07);
+      transition: color 0.15s, background 0.15s; cursor: pointer;
+    }
+    .dropdown a:hover { color: var(--gold-lt); background: rgba(255,255,255,0.05); }
+
+    .nav-apply-btn { margin-left: auto; display: flex; align-items: center; padding: 0 3rem 0 0; }
+    .nav-apply-btn a {
+      background: var(--navy); color: #fff !important; padding: 0.4rem 1.1rem;
+      font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; border-radius: 2px; transition: background 0.2s; cursor: pointer;
+    }
+    .nav-apply-btn a:hover { background: var(--navy-lt); }
+
+    .inner-layout { display: grid; grid-template-columns: 220px 1fr; max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; gap: 4rem; align-items: start; }
+    .sidebar-nav { position: sticky; top: 20px; }
+    .sidebar-nav a { display: block; font-family: var(--sans); font-size: 0.9rem; color: var(--slate); padding: 0.65rem 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: color 0.15s; }
+    .sidebar-nav a:hover { color: var(--navy); }
+    .sidebar-nav a.active { color: var(--navy-lt); font-weight: 600; }
+
+    .page-hero { width: 100%; height: 340px; background: var(--navy-mid); position: relative; overflow: hidden; display: flex; align-items: flex-end; }
+    .page-hero-placeholder {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e3a5f 100%);
+    }
+    .page-hero-placeholder::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.04) 0px, rgba(201,168,76,0.04) 1px, transparent 1px, transparent 40px);
+    }
+    .page-hero-content { position: relative; z-index: 2; padding: 2rem 3rem; }
+
+    #home .home-hero { background: var(--navy); padding: 5rem 3rem 4rem; position: relative; overflow: hidden; }
+    #home .home-hero::before { content: 'Φ'; font-family: var(--serif); font-size: 40vw; color: rgba(255,255,255,0.02); position: absolute; right: -5vw; top: -10vw; line-height: 1; pointer-events: none; }
+    #home .home-hero-inner { max-width: 800px; position: relative; z-index: 1; }
+    #home .eyebrow { font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
+    #home .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+    #home h1 { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 400; color: #fff; line-height: 1.15; margin-bottom: 1.25rem; }
+    #home h1 em { font-style: italic; color: var(--gold-lt); }
+    #home .home-hero p { font-size: 1.05rem; color: rgba(255,255,255,0.72); max-width: 580px; line-height: 1.8; font-weight: 300; margin-bottom: 2rem; }
+
+    .btn { display: inline-block; padding: 0.8rem 2rem; font-family: var(--sans); font-size: 0.85rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold-lt); }
+    .btn-outline-white { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.9); margin-left: 0.75rem; }
+    .btn-outline-white:hover { border-color: var(--gold); color: var(--gold-lt); }
+
+    .home-info-strip { background: var(--gold); display: flex; justify-content: center; gap: 5rem; flex-wrap: wrap; padding: 2.5rem 3rem; }
+    .info-pill { text-align: center; }
+    .info-pill .val { font-family: var(--serif); font-size: 1.6rem; color: var(--navy); display: block; line-height: 1; }
+    .info-pill .key { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(14,34,64,0.65); margin-top: 0.3rem; }
+
+    .home-body { max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; }
+    .home-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+    .home-body h2 { font-family: var(--serif); font-size: 2rem; font-weight: 400; color: var(--navy); }
+    .home-body h2 em { font-style: italic; }
+    .home-body p { color: var(--slate); font-size: 0.98rem; line-height: 1.85; margin-top: 1rem; }
+
+    .pull-quote { background: var(--navy); padding: 2.5rem; border-radius: 2px; position: relative; overflow: hidden; }
+    .pull-quote::before { content: '\201C'; font-family: var(--serif); font-size: 7rem; color: rgba(201,168,76,0.15); position: absolute; top: -0.5rem; left: 0.75rem; line-height: 1; }
+    .pull-quote blockquote { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: rgba(255,255,255,0.9); line-height: 1.65; position: relative; z-index: 1; }
+    .pull-quote cite { display: block; margin-top: 1rem; font-family: var(--sans); font-size: 0.75rem; font-style: normal; color: var(--gold-lt); letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .content-body { max-width: 760px; }
+    .content-body h1 { font-family: var(--serif); font-size: 2.4rem; font-weight: 400; color: var(--navy); margin-bottom: 1.25rem; }
+    .content-body h2 { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; color: var(--navy); margin: 2.5rem 0 0.75rem; }
+    .content-body p { color: var(--slate); font-size: 0.97rem; line-height: 1.9; margin-bottom: 1rem; }
+    .content-body hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+    .faculty-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+    .faculty-card { background: var(--warm); padding: 2rem; border-radius: 2px; border-left: 3px solid var(--gold); }
+    .faculty-card .fc-name { font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--navy); }
+    .faculty-card .fc-role { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin: 0.2rem 0 0.75rem; }
+    .faculty-card p { font-size: 0.88rem; color: var(--slate); line-height: 1.75; }
+
+    .reading-list { list-style: none; margin-top: 1rem; }
+    .reading-list li { padding: 0.75rem 0; border-bottom: 1px solid var(--border); font-family: var(--serif); font-size: 1rem; color: var(--ink); display: flex; gap: 1rem; align-items: baseline; }
+    .reading-list li::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+    .reading-list .author { font-size: 0.82rem; color: var(--muted); margin-top: 0.15rem; display: block; }
+
+    .deadline-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+    .deadline-table th { font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--navy); color: rgba(255,255,255,0.85); padding: 0.75rem 1rem; text-align: left; }
+    .deadline-table td { padding: 0.85rem 1rem; font-size: 0.93rem; color: var(--slate); border-bottom: 1px solid var(--border); }
+    .deadline-table tr:last-child td { border-bottom: none; }
+    .deadline-table td strong { color: var(--ink); }
+
+    .req-table { width: 100%; border-collapse: collapse; margin-top: 1.5rem; }
+    .req-table td { padding: 1rem; font-size: 0.93rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .req-table td:first-child { font-weight: 600; color: var(--navy); width: 160px; white-space: nowrap; }
+    .req-table td:last-child { color: var(--slate); line-height: 1.75; }
+
+    .apply-cta-box { background: var(--navy); color: #fff; padding: 2.5rem 2rem; border-radius: 2px; margin-top: 2.5rem; }
+    .apply-cta-box h3 { font-family: var(--serif); font-size: 1.5rem; color: var(--gold-lt); margin-bottom: 0.5rem; }
+    .apply-cta-box p { font-size: 0.9rem; color: rgba(255,255,255,0.7); line-height: 1.8; margin-bottom: 1.5rem; }
+
+    .aid-highlight { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); color: #fff; padding: 2.5rem; border-radius: 2px; margin-bottom: 2rem; display: flex; align-items: center; gap: 2rem; }
+    .aid-highlight .big-text { font-family: var(--serif); font-size: 4rem; color: var(--gold-lt); line-height: 1; flex-shrink: 0; }
+    .aid-highlight p { font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.75; }
+
+    .accordion-item { border-bottom: 1px solid var(--border); }
+    .accordion-q { font-family: var(--serif); font-size: 1.05rem; color: var(--navy); padding: 1.1rem 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .accordion-q .icon { font-size: 1.2rem; color: var(--gold); transition: transform 0.25s; }
+    .accordion-q.open .icon { transform: rotate(45deg); }
+    .accordion-a { display: none; padding: 0 0 1.25rem; font-size: 0.93rem; color: var(--slate); line-height: 1.85; }
+    .accordion-a.open { display: block; }
+
+    footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 3.5rem 3rem; text-align: center; }
+    .footer-title { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 0.25rem; }
+    .footer-title span { color: var(--gold-lt); }
+    footer p { font-size: 0.82rem; line-height: 1.9; }
+    footer a { color: var(--gold-lt); }
+    .footer-sep { width: 36px; height: 1px; background: var(--gold); margin: 1.25rem auto; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.25rem; }
+    .footer-links a { font-size: 0.75rem; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(255,255,255,0.35); cursor: pointer; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold-lt); }
+
+    @media (max-width: 800px) {
+      .header-top { padding: 1rem 1.25rem 0.75rem; }
+      .primary-nav ul { padding: 0 1rem; }
+      .inner-layout { grid-template-columns: 1fr; padding: 2rem 1.25rem; gap: 2rem; }
+      .sidebar-nav { position: static; display: flex; gap: 1rem; flex-wrap: wrap; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
+      .sidebar-nav a { border: none; padding: 0.3rem 0; }
+      .home-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .faculty-grid { grid-template-columns: 1fr; }
+      #home .home-hero { padding: 3.5rem 1.25rem 3rem; }
+      .home-body { padding: 3rem 1.25rem; }
+      .home-info-strip { gap: 2rem; padding: 2rem 1.5rem; }
+      .page-hero { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <div class="site-title" onclick="showPage('home')">The Academy Fellowship</div>
+  </div>
+  <nav class="primary-nav">
+    <ul>
+      <li id="nav-about" class="active">
+        <span onclick="showPage('about')">About</span>
+        <div class="dropdown">
+          <a onclick="showPage('about')">About the Fellowship</a>
+          <a onclick="showPage('about')">Vision &amp; Mission</a>
+          <a onclick="showPage('about')">Our Team</a>
+          <a onclick="showPage('about')">Contact</a>
+        </div>
+      </li>
+      <li id="nav-academics">
+        <span onclick="showPage('academics')">Academics</span>
+        <div class="dropdown">
+          <a onclick="showPage('academics')">Our Program</a>
+          <a onclick="showPage('academics')">Core Curriculum</a>
+          <a onclick="showPage('academics')">Seminar Structure</a>
+        </div>
+      </li>
+      <li id="nav-apply">
+        <span onclick="showPage('apply')">How to Apply</span>
+        <div class="dropdown">
+          <a onclick="showPage('apply')">How to Apply</a>
+          <a onclick="showPage('apply')">Deadlines</a>
+          <a onclick="showPage('apply')">Eligibility</a>
+          <a onclick="showPage('apply')">Required Components</a>
+          <a onclick="showPage('apply')">Admissions Questions</a>
+        </div>
+      </li>
+      <li id="nav-tuition">
+        <span onclick="showPage('tuition')">Tuition &amp; Aid</span>
+        <div class="dropdown">
+          <a onclick="showPage('tuition')">Tuition</a>
+          <a onclick="showPage('tuition')">Need-Based Financial Aid</a>
+          <a onclick="showPage('tuition')">Transportation Stipend</a>
+        </div>
+      </li>
+      <li id="nav-faq"><span onclick="showPage('faq')">FAQ</span></li>
+      <li id="nav-alumni"><span onclick="showPage('alumni')">Alumni</span></li>
+    </ul>
+    <div class="nav-apply-btn"><a onclick="showPage('apply')">Apply Now</a></div>
+  </nav>
+</header>
+
+<!-- HOME -->
+<div id="home" class="page active">
+  <div class="home-hero">
+    <div class="home-hero-inner">
+      <div class="eyebrow">New York Philosophical Society · Summer 2026</div>
+      <h1>The <em>Academy</em><br>Fellowship</h1>
+      <p>A six-week philosophy program for exceptional high school students. Fellows read the Great Books, meet weekly in extended seminar, and test their ideas through close dialogue with faculty and peers.</p>
+      <span class="btn btn-gold" onclick="showPage('apply')">Apply for Summer 2026</span>
+      <span class="btn btn-outline-white" onclick="showPage('academics')">Explore the Program</span>
+    </div>
+  </div>
+  <div class="home-info-strip">
+    <div class="info-pill"><span class="val">Free</span><span class="key">Tuition</span></div>
+    <div class="info-pill"><span class="val">6 Weeks</span><span class="key">Jul 13 – Aug 23</span></div>
+    <div class="info-pill"><span class="val">NYC</span><span class="key">Midtown Manhattan</span></div>
+    <div class="info-pill"><span class="val">May 20</span><span class="key">Application Deadline</span></div>
+  </div>
+  <div class="home-body">
+    <div style="margin-bottom:0.5rem;font-family:var(--sans);font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.6rem;">
+      <span style="width:24px;height:1px;background:var(--gold);display:inline-block;"></span>Inspired Minds
+    </div>
+    <h2>What is virtue? What does <em>a life well-lived</em> actually require?</h2>
+    <div class="home-grid">
+      <div>
+        <p>The Academy Fellowship is not a lecture series. It is a demanding, six-week intellectual community built on the conviction that the most important questions are not answered in a classroom — they are wrestled with, together, by people who refuse to take easy answers.</p>
+        <p>Fellows read through the Great Books across traditions — Greek, Chinese, Indian, Hebrew — and meet weekly in extended Socratic seminar. They are expected to ask not only what is true, but what such truths demand of us.</p>
+        <p>No prior philosophy background required. Only curiosity, intellectual honesty, and the willingness to have your thinking genuinely challenged.</p>
+        <div style="margin-top:2rem;">
+          <span class="btn btn-gold" onclick="showPage('academics')" style="font-size:0.82rem;">View Curriculum →</span>
+        </div>
+      </div>
+      <div class="pull-quote">
+        <blockquote>"We are looking for students who are genuinely curious, introspective, and willing to have their thinking challenged. There is no ideal background or profile."</blockquote>
+        <cite>— Cole Whetstone, Academic Director</cite>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="page">
+  <div class="page-hero">
+    <div class="page-hero-placeholder"></div>
+    <div class="page-hero-content">
+      <div style="font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">About</div>
+      <div style="font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;">The Academy Fellowship</div>
+    </div>
+  </div>
+  <div class="inner-layout">
+    <nav class="sidebar-nav">
+      <a class="active" onclick="scrollToId('sec-about')">About the Fellowship</a>
+      <a onclick="scrollToId('sec-mission')">Vision &amp; Mission</a>
+      <a onclick="scrollToId('sec-team')">Our Team</a>
+      <a onclick="scrollToId('sec-contact')">Contact</a>
+    </nav>
+    <div class="content-body">
+      <div id="sec-about">
+        <h1>About the Fellowship</h1>
+        <p>The Academy Fellowship is a six-week philosophy program for exceptional high school students run by the New York Philosophical Society. Fellows read through the Great Books, meet weekly in extended seminar, and test their ideas through close dialogue with faculty and peers.</p>
+        <p>The program takes place in Midtown Manhattan from July 13 through August 23, 2026. Fellows meet one to two times per week in person for extended seminar and are expected to complete 10–15 hours of independent reading to prepare for each session.</p>
+        <p>The program is entirely free of charge. Students with financial need receive a stipend to cover materials and transportation.</p>
+        <hr />
+      </div>
+      <div id="sec-mission">
+        <h2>Vision &amp; Mission</h2>
+        <p>We believe philosophy is not a subject. It is a practice — the oldest and most urgent one we have. Our mission is to recover that practice in the life of young New Yorkers, and to build a community where the examined life is not an aspiration but a living reality.</p>
+        <p>The New York Philosophical Society was founded on the conviction that meaning and human connection can be restored through the shared pursuit of wisdom. The Academy Fellowship is the most intensive expression of that conviction.</p>
+        <hr />
+      </div>
+      <div id="sec-team">
+        <h2>Our Team</h2>
+        <div class="faculty-grid">
+          <div class="faculty-card">
+            <div class="fc-name">Cole Whetstone</div>
+            <div class="fc-role">Academic Director &amp; Lead Faculty</div>
+            <p>After studying Classics at Harvard University, Cole received a full scholarship to study Ancient Philosophy at the University of Oxford, where he taught Ancient Greek for two years. His research in the philosophy of medicine has been published in academic journals. Cole co-founded NYPS and speaks nine languages.</p>
+          </div>
+          <div class="faculty-card">
+            <div class="fc-name">Harrison Orlando</div>
+            <div class="fc-role">Head of Admissions</div>
+            <p>Harrison studied Mathematics and Philosophy at the University of Chicago before beginning his career at Bridgewater Associates. Harrison leads the admissions and interview process for the Fellowship.</p>
+          </div>
+        </div>
+        <hr />
+      </div>
+      <div id="sec-contact">
+        <h2>Contact</h2>
+        <p>For questions about the Academy Fellowship, please reach out to us at <a href="mailto:fellowship@nyphilosophy.org" style="color:var(--navy-lt);text-decoration:underline;">fellowship@nyphilosophy.org</a>.</p>
+        <p>The New York Philosophical Society is located in New York City. The Academy Fellowship holds seminars in Midtown Manhattan.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ACADEMICS -->
+<div id="academics" class="page">
+  <div class="page-hero">
+    <div class="page-hero-placeholder"></div>
+    <div class="page-hero-content">
+      <div style="font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Academics</div>
+      <div style="font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;">Core Curriculum</div>
+    </div>
+  </div>
+  <div class="inner-layout">
+    <nav class="sidebar-nav">
+      <a class="active" onclick="scrollToId('sec-program')">Our Program</a>
+      <a onclick="scrollToId('sec-curriculum')">Core Reading</a>
+      <a onclick="scrollToId('sec-seminar')">Seminar Structure</a>
+    </nav>
+    <div class="content-body">
+      <div id="sec-program">
+        <h1>Our Program</h1>
+        <p>The Academy Fellowship emphasizes an open, rigorous, and collaborative approach to learning. The program is designed around the Socratic method: close reading, sustained dialogue, and the willingness to follow an argument wherever it leads.</p>
+        <p>Unlike most academic enrichment programs, the Fellowship assigns no grades and offers no college credit. Fellows are trusted to set their own limits and to pursue understanding for its own sake.</p>
+        <p>Each week, fellows complete substantial reading from the core curriculum independently, then gather for an extended seminar of two to three hours. Sessions are led by faculty but shaped by fellows — the best conversations arise from genuine disagreement.</p>
+        <hr />
+      </div>
+      <div id="sec-curriculum">
+        <h2>Core Reading</h2>
+        <p>The curriculum spans the great philosophical traditions of the ancient world. Fellows read primary texts in their entirety — not excerpts or summaries.</p>
+        <ul class="reading-list">
+          <li><span>The Proverbs of Solomon<span class="author">Hebrew Wisdom Literature</span></span></li>
+          <li><span>Ecclesiastes<span class="author">Hebrew Wisdom Literature</span></span></li>
+          <li><span>The Book of Job<span class="author">Hebrew Wisdom Literature</span></span></li>
+          <li><span>The Analects<span class="author">Confucius</span></span></li>
+          <li><span>Dao De Jing<span class="author">Laozi</span></span></li>
+          <li><span>The Dhammapada<span class="author">Buddhist Canon</span></span></li>
+          <li><span>The Bhagavad Gita<span class="author">Hindu Scripture</span></span></li>
+          <li><span>Republic, Book I<span class="author">Plato</span></span></li>
+          <li><span>Nicomachean Ethics<span class="author">Aristotle</span></span></li>
+        </ul>
+        <hr />
+      </div>
+      <div id="sec-seminar">
+        <h2>Seminar Structure</h2>
+        <p>Fellows meet one to two times per week in Midtown Manhattan for extended seminars of two to three hours. Between sessions, fellows are expected to complete 10–15 hours of independent reading.</p>
+        <p>Seminars are small by design — never more than 15 fellows at a time — to ensure that every voice is heard and every idea genuinely tested. Faculty do not lecture; they ask questions.</p>
+        <p>The program concludes with a Capstone Dialogue in which each fellow presents and defends an original philosophical position before the full cohort and faculty panel.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPLY -->
+<div id="apply" class="page">
+  <div class="page-hero">
+    <div class="page-hero-placeholder"></div>
+    <div class="page-hero-content">
+      <div style="font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">How to Apply</div>
+      <div style="font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;">Apply for Summer 2026</div>
+    </div>
+  </div>
+  <div class="inner-layout">
+    <nav class="sidebar-nav">
+      <a class="active" onclick="scrollToId('sec-how')">How to Apply</a>
+      <a onclick="scrollToId('sec-deadlines')">Deadlines</a>
+      <a onclick="scrollToId('sec-eligibility')">Eligibility</a>
+      <a onclick="scrollToId('sec-components')">Required Components</a>
+      <a onclick="scrollToId('sec-admissions-q')">Admissions Questions</a>
+    </nav>
+    <div class="content-body">
+      <div id="sec-how">
+        <h1>How to Apply</h1>
+        <p>Applications for the Summer 2026 Academy Fellowship open March 15, 2026 and close May 20, 2026. The application consists of two short essays, an official transcript, and a brief interview conducted by members of our admissions committee.</p>
+        <p>We use a holistic review process. Academic achievement matters, but we are equally interested in how you think and what you care about. There is no ideal background or profile.</p>
+        <div class="apply-cta-box">
+          <h3>Applications Open March 15, 2026</h3>
+          <p>The application will be available at this link beginning March 15. Sign up below to be notified when it opens.</p>
+          <a class="btn btn-gold" href="mailto:fellowship@nyphilosophy.org?subject=Notify me when applications open">Get Notified →</a>
+        </div>
+        <hr />
+      </div>
+      <div id="sec-deadlines">
+        <h2>Deadlines</h2>
+        <table class="deadline-table">
+          <tr><th>Milestone</th><th>Date</th></tr>
+          <tr><td><strong>Applications Open</strong></td><td>March 15, 2026</td></tr>
+          <tr><td><strong>Application Deadline</strong></td><td>May 20, 2026</td></tr>
+          <tr><td><strong>Interviews</strong></td><td>Late May – Early June 2026</td></tr>
+          <tr><td><strong>Decisions Released</strong></td><td>June 10, 2026</td></tr>
+          <tr><td><strong>Program Begins</strong></td><td>July 13, 2026</td></tr>
+          <tr><td><strong>Program Ends</strong></td><td>August 23, 2026</td></tr>
+        </table>
+        <hr />
+      </div>
+      <div id="sec-eligibility">
+        <h2>Eligibility</h2>
+        <p>In order to apply to the Academy Fellowship, applicants must fulfill all of the following requirements:</p>
+        <table class="req-table">
+          <tr><td>Grade Level</td><td>Rising juniors, rising seniors, and incoming college freshmen</td></tr>
+          <tr><td>Age</td><td>At least 16 years old by June 20, 2026 and may not turn 19 before July 31, 2026</td></tr>
+          <tr><td>Location</td><td>Must be able to commute to Midtown Manhattan for weekly seminars</td></tr>
+          <tr><td>Language</td><td>English fluency sufficient for extended Socratic seminar participation</td></tr>
+          <tr><td>First-time</td><td>Priority given to first-time Academy Fellowship applicants</td></tr>
+        </table>
+        <hr />
+      </div>
+      <div id="sec-components">
+        <h2>Required Components</h2>
+        <p>All applicants must submit the following:</p>
+        <ul class="reading-list">
+          <li><span>Two short essays (prompts provided in application)</span></li>
+          <li><span>Official high school transcript</span></li>
+          <li><span>Brief interview with admissions committee (by invitation)</span></li>
+        </ul>
+        <p style="margin-top:1.25rem;font-size:0.88rem;color:var(--muted);">No letters of recommendation are required. No application fee.</p>
+        <hr />
+      </div>
+      <div id="sec-admissions-q">
+        <h2>Admissions Questions</h2>
+        <p>For questions about the application process, eligibility, or financial aid, contact our Head of Admissions, Harrison Orlando, at <a href="mailto:fellowship@nyphilosophy.org" style="color:var(--navy-lt);text-decoration:underline;">fellowship@nyphilosophy.org</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TUITION -->
+<div id="tuition" class="page">
+  <div class="page-hero">
+    <div class="page-hero-placeholder"></div>
+    <div class="page-hero-content">
+      <div style="font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Tuition &amp; Aid</div>
+      <div style="font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;">Financial Information</div>
+    </div>
+  </div>
+  <div class="inner-layout">
+    <nav class="sidebar-nav">
+      <a class="active" onclick="scrollToId('sec-tuition')">Tuition</a>
+      <a onclick="scrollToId('sec-aid')">Need-Based Aid</a>
+      <a onclick="scrollToId('sec-stipend')">Transportation Stipend</a>
+    </nav>
+    <div class="content-body">
+      <div id="sec-tuition">
+        <h1>Tuition &amp; Aid</h1>
+        <div class="aid-highlight">
+          <div class="big-text">$0</div>
+          <p>The Academy Fellowship is entirely free of tuition. We believe cost should never be a barrier to the life of the mind. There are no program fees, no application fees, and no hidden costs.</p>
+        </div>
+        <hr />
+      </div>
+      <div id="sec-aid">
+        <h2>Need-Based Financial Aid</h2>
+        <p>Students with demonstrated financial need will receive a stipend to cover the cost of required course materials, including physical copies of texts on the reading list.</p>
+        <p>Financial need is determined through a brief, confidential section of the application. There is no threshold — all applicants are encouraged to apply for aid if they have any financial need.</p>
+        <hr />
+      </div>
+      <div id="sec-stipend">
+        <h2>Transportation Stipend</h2>
+        <p>Fellows who require financial assistance with transportation to and from weekly seminars in Midtown Manhattan are eligible to receive a transportation stipend for the duration of the program.</p>
+        <p>To apply for the transportation stipend, indicate your need in the financial aid section of the application. Stipend amounts are determined on a case-by-case basis.</p>
+        <p>For questions about financial aid or stipends, contact us at <a href="mailto:fellowship@nyphilosophy.org" style="color:var(--navy-lt);text-decoration:underline;">fellowship@nyphilosophy.org</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" class="page">
+  <div class="page-hero">
+    <div class="page-hero-placeholder"></div>
+    <div class="page-hero-content">
+      <div style="font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">FAQ</div>
+      <div style="font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;">Frequently Asked Questions</div>
+    </div>
+  </div>
+  <div class="inner-layout" style="grid-template-columns:1fr;max-width:760px;">
+    <div class="content-body" style="max-width:100%;">
+      <h1>Common Questions</h1>
+      <div style="margin-top:2rem;">
+        <div class="accordion-item">
+          <div class="accordion-q" onclick="toggleAccordion(this)">What are you looking for in applicants?<span class="icon">+</span></div>
+          <div class="accordion-a">We are looking for students who are genuinely curious, introspective, and willing to have their thinking challenged. Academic achievement matters, but we are equally interested in how you think and what you care about. There is no ideal background or profile.</div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-q" onclick="toggleAccordion(this)">Do I need prior philosophy experience?<span class="icon">+</span></div>
+          <div class="accordion-a">No prior philosophy background is required or expected. Many of our strongest fellows have never taken a philosophy class. What matters is your willingness to read carefully and engage honestly.</div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-q" onclick="toggleAccordion(this)">How do I apply?<span class="icon">+</span></div>
+          <div class="accordion-a">Applications open March 15, 2026 and close May 20, 2026. The application consists of two short essays, an official transcript, and a brief interview conducted by members of our admissions committee. There is no application fee.</div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-q" onclick="toggleAccordion(this)">Who is eligible?<span class="icon">+</span></div>
+          <div class="accordion-a">The Academy Fellowship is open to rising juniors, rising seniors, and incoming college freshmen. Applicants must be at least 16 years old by June 20, 2026 and may not turn 19 before July 31, 2026.</div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-q" onclick="toggleAccordion(this)">What does it cost?<span class="icon">+</span></div>
+          <div class="accordion-a">The program is entirely free of charge. Students with financial need will receive a stipend to cover materials and transportation.</div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-q" onclick="toggleAccordion(this)">How often do we meet in person?<span class="icon">+</span></div>
+          <div class="accordion-a">Fellows meet 1–2 times per week in person for extended seminar in Midtown Manhattan and are expected to complete 10–15 hours of independent reading to prepare for each session.</div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-q" onclick="toggleAccordion(this)">Is the program residential?<span class="icon">+</span></div>
+          <div class="accordion-a">The program is a day program. Fellows commute to Midtown Manhattan for weekly seminars. Transportation stipends are available for those with demonstrated financial need.</div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-q" onclick="toggleAccordion(this)">Are grades or college credit offered?<span class="icon">+</span></div>
+          <div class="accordion-a">No grades are assigned and no college credit is offered. Fellows receive a certificate of completion from the New York Philosophical Society at the end of the program.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ALUMNI -->
+<div id="alumni" class="page">
+  <div class="page-hero">
+    <div class="page-hero-placeholder"></div>
+    <div class="page-hero-content">
+      <div style="font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Alumni</div>
+      <div style="font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;">Fellowship Alumni</div>
+    </div>
+  </div>
+  <div class="inner-layout" style="grid-template-columns:1fr;max-width:760px;">
+    <div class="content-body" style="max-width:100%;">
+      <h1>Alumni</h1>
+      <p>The Academy Fellowship is in its inaugural year in Summer 2026. Alumni resources and the alumni network will be built in the years that follow.</p>
+      <p>If you are a past participant in NYPS programming and would like to be involved in the Fellowship as a mentor or guest speaker, please contact us at <a href="mailto:fellowship@nyphilosophy.org" style="color:var(--navy-lt);text-decoration:underline;">fellowship@nyphilosophy.org</a>.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-title">New York <span>Philosophical Society</span></div>
+  <p>The Academy Fellowship · Summer 2026</p>
+  <div class="footer-sep"></div>
+  <p>New York Philosophical Society Inc. is a 501(c)(3) charity · EIN 33-1437268</p>
+  <p style="margin-top:0.3rem;"><a href="mailto:fellowship@nyphilosophy.org">fellowship@nyphilosophy.org</a> · <a href="https://www.nyphilosophy.org">nyphilosophy.org</a></p>
+  <div class="footer-links">
+    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('academics')">Academics</a>
+    <a onclick="showPage('apply')">Apply</a>
+    <a onclick="showPage('tuition')">Tuition &amp; Aid</a>
+    <a onclick="showPage('faq')">FAQ</a>
+    <a onclick="showPage('alumni')">Alumni</a>
+  </div>
+</footer>
+
+<script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.primary-nav > ul > li').forEach(li => li.classList.remove('active'));
+    const navEl = document.getElementById('nav-' + id);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function toggleAccordion(el) {
+    el.classList.toggle('open');
+    el.nextElementSibling.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
