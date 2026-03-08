@@ -196,6 +196,7 @@
       .faculty-card-photo { aspect-ratio: 4/3; height: auto; width: 100%; min-width: unset; }
       .faculty-card-body { padding: 1.25rem 1.5rem; }
       #home .home-hero { padding: 3.5rem 1.25rem 3rem; }
+      #home .home-hero .btn { display: block; width: fit-content; margin-left: 0; margin-top: 0.75rem; }
       .home-body { padding: 3rem 1.25rem; }
       .home-info-strip { gap: 2rem; padding: 2rem 1.5rem; }
       .page-hero { height: 220px; }
@@ -214,12 +215,12 @@
   <nav class="primary-nav">
     <ul>
       <li id="nav-about" class="active">
-        <span onclick="showPage('about')">About</span>
+        <span onclick="showPage('home')">About</span>
         <div class="dropdown">
-          <a onclick="showPage('about', 'sec-about')">About the Fellowship</a>
-          <a onclick="showPage('about', 'sec-mission')">Vision &amp; Mission</a>
-          <a onclick="showPage('about', 'sec-team')">Our Team</a>
-          <a onclick="showPage('about', 'sec-contact')">Contact</a>
+          <a onclick="showPage('home', 'sec-about')">About the Fellowship</a>
+          <a onclick="showPage('home', 'sec-mission')">Vision &amp; Mission</a>
+          <a onclick="showPage('home', 'sec-team')">Meet the Faculty</a>
+          <a onclick="showPage('home', 'sec-contact')">Contact</a>
         </div>
       </li>
       <li id="nav-academics">
@@ -292,22 +293,11 @@
       </div>
     </div>
   </div>
-</div>
-
-<!-- ABOUT -->
-<div id="about" class="page">
-  <div class="page-hero">
-    <div class="page-hero-placeholder"></div>
-    <div class="page-hero-content">
-      <div style="font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">About</div>
-      <div style="font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;">The Academy Fellowship</div>
-    </div>
-  </div>
   <div class="inner-layout">
     <nav class="sidebar-nav">
       <a class="active" onclick="scrollToId('sec-about')">About the Fellowship</a>
       <a onclick="scrollToId('sec-mission')">Vision &amp; Mission</a>
-      <a onclick="scrollToId('sec-team')">Our Team</a>
+      <a onclick="scrollToId('sec-team')">Meet the Faculty</a>
       <a onclick="scrollToId('sec-contact')">Contact</a>
     </nav>
     <div class="content-body">
@@ -330,7 +320,7 @@
         <div class="faculty-grid">
           <div class="faculty-card">
             <div class="faculty-card-photo">
-              <img src="harrison.jpg" alt="Harrison Orlando" />
+              <img src="harrison.jpg" alt="Harrison Orlando" style="object-position: center 65%;" />
             </div>
             <div class="faculty-card-body">
               <div class="fc-name">Harrison Orlando</div>
@@ -598,7 +588,7 @@
   <p>New York Philosophical Society Inc. is a 501(c)(3) charity · EIN 33-1437268</p>
   <p style="margin-top:0.3rem;"><a href="mailto:fellowship@nyphilosophy.org">fellowship@nyphilosophy.org</a> · <a href="https://www.nyphilosophy.org">nyphilosophy.org</a></p>
   <div class="footer-links">
-    <a onclick="showPage('about')">About</a>
+    <a onclick="showPage('home')">About</a>
     <a onclick="showPage('academics')">Academics</a>
     <a onclick="showPage('apply')">Apply</a>
     <a onclick="showPage('tuition')">Tuition &amp; Aid</a>
@@ -612,7 +602,8 @@
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     document.querySelectorAll('.primary-nav > ul > li').forEach(li => li.classList.remove('active'));
-    const navEl = document.getElementById('nav-' + id);
+    const navId = id === 'home' ? 'about' : id;
+    const navEl = document.getElementById('nav-' + navId);
     if (navEl) navEl.classList.add('active');
     if (sectionId) {
       window.scrollTo({ top: 0 });
