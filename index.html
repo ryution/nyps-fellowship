@@ -18,38 +18,54 @@
   <meta name="twitter:title" content="The Academy Fellowship | New York Philosophical Society" />
   <meta name="twitter:description" content="A fully funded six-week philosophy program for exceptional high school students in Midtown Manhattan. Summer 2026." />
   <meta name="twitter:image" content="https://fellowship.nyphilosophy.org/schoolathens2.jpg" />
+  <meta property="og:locale" content="en_US" />
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "EducationEvent",
-    "name": "The Academy Fellowship — Summer 2026",
-    "description": "A fully funded six-week philosophy program for exceptional high school students hosted by the New York Philosophical Society.",
-    "url": "https://fellowship.nyphilosophy.org",
-    "startDate": "2026-07-13",
-    "endDate": "2026-08-23",
-    "eventStatus": "https://schema.org/EventScheduled",
-    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-    "location": {
-      "@type": "Place",
-      "name": "Midtown Manhattan",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "New York",
-        "addressRegion": "NY",
-        "addressCountry": "US"
-      }
-    },
-    "organizer": {
+  [
+    {
+      "@context": "https://schema.org",
       "@type": "Organization",
       "name": "New York Philosophical Society",
-      "url": "https://www.nyphilosophy.org"
+      "url": "https://www.nyphilosophy.org",
+      "logo": "https://fellowship.nyphilosophy.org/schoolathens2.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "fellowship@nyphilosophy.org",
+        "contactType": "admissions"
+      },
+      "sameAs": ["https://www.nyphilosophy.org"]
     },
-    "isAccessibleForFree": true,
-    "audience": {
-      "@type": "Audience",
-      "audienceType": "High school students"
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationEvent",
+      "name": "The Academy Fellowship — Summer 2026",
+      "description": "A fully funded six-week philosophy program for exceptional high school students hosted by the New York Philosophical Society.",
+      "url": "https://fellowship.nyphilosophy.org",
+      "startDate": "2026-07-13",
+      "endDate": "2026-08-23",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "Midtown Manhattan",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "New York",
+          "addressRegion": "NY",
+          "addressCountry": "US"
+        }
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "New York Philosophical Society",
+        "url": "https://www.nyphilosophy.org"
+      },
+      "isAccessibleForFree": true,
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "High school students"
+      }
     }
-  }
+  ]
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -66,38 +82,15 @@
     <ul>
       <li id="nav-home" class="active">
         <a href="/">Home</a>
-        <div class="dropdown">
-          <a href="/#sec-about">About the Fellowship</a>
-          <a href="/#sec-mission">Vision &amp; Mission</a>
-          <a href="/#sec-team">Meet the Faculty</a>
-          <a href="/#sec-contact">Contact</a>
-        </div>
       </li>
       <li id="nav-academics">
         <a href="/academics/">Academics</a>
-        <div class="dropdown">
-          <a href="/academics/#sec-program">Our Program</a>
-          <a href="/academics/#sec-curriculum">Core Reading</a>
-          <a href="/academics/#sec-seminar">Seminar Structure</a>
-        </div>
       </li>
       <li id="nav-apply">
         <a href="/how-to-apply/">How to Apply</a>
-        <div class="dropdown">
-          <a href="/how-to-apply/#sec-how">How to Apply</a>
-          <a href="/how-to-apply/#sec-deadlines">Deadlines</a>
-          <a href="/how-to-apply/#sec-eligibility">Eligibility</a>
-          <a href="/how-to-apply/#sec-components">Required Components</a>
-          <a href="/how-to-apply/#sec-admissions-q">Admissions Questions</a>
-        </div>
       </li>
       <li id="nav-tuition">
         <a href="/tuition/">Tuition &amp; Aid</a>
-        <div class="dropdown">
-          <a href="/tuition/#sec-tuition">Tuition</a>
-          <a href="/tuition/#sec-aid">Need-Based Financial Aid</a>
-          <a href="/tuition/#sec-stipend">Transportation Stipend</a>
-        </div>
       </li>
       <li id="nav-faq"><a href="/faq/">FAQ</a></li>
       <li id="nav-alumni"><a href="/alumni/">Alumni</a></li>
@@ -146,7 +139,7 @@
   <div class="content-body">
     <div id="sec-about">
       <h2 style="color: var(--ink); margin-top: 0;">About the Fellowship</h2>
-      <p>Hosted by the New York Philosophical Society, the Academy Fellowship brings together a small cohort of serious students for six weeks of intensive study in Midtown Manhattan. Fellows meet in person one to two times per week for extended seminar and complete 10–15 hours of independent reading between sessions.</p>
+      <p>Hosted by the New York Philosophical Society, the Academy Fellowship brings together a small cohort of students for six weeks of intensive study in Midtown Manhattan. Fellows meet in person one to two times per week for extended seminar and complete 10–15 hours of independent reading between sessions.</p>
       <p>The program runs from July 13 through August 23, 2026. It is fully funded, and students with financial need also receive a stipend to help cover materials and transportation.</p>
       <hr />
     </div>
@@ -216,6 +209,13 @@
   const links = document.querySelectorAll('.sidebar-nav a');
   const sections = document.querySelectorAll('.content-body > div[id]');
   if (!links.length || !sections.length) return;
+  links.forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.getElementById(this.getAttribute('href').slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
