@@ -466,7 +466,7 @@
         <div class="apply-cta-box">
           <h3>Applications Now Open</h3>
           <p>Applications are open through May 15, 2026. To apply, contact us at the address below and we will send you the application materials.</p>
-          <a class="btn btn-gold" href="mailto:fellowship@nyphilosophy.org?subject=Application for Summer 2026">Apply Now →</a>
+          <span class="btn btn-gold" onclick="showPage('apply-form')">Apply Now →</span>
         </div>
         <hr />
       </div>
@@ -622,10 +622,24 @@
   </div>
 </div>
 
+<!-- APPLICATION FORM PAGE (not in nav) -->
+<div id="apply-form" class="page">
+  <div class="page-hero">
+    <div class="page-hero-placeholder"></div>
+    <div class="page-hero-content">
+      <div style="font-family:var(--sans);font-size:0.7rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.6rem;">Apply</div>
+      <div style="font-family:var(--serif);font-size:2.2rem;color:#fff;font-weight:400;">Summer 2026 Application</div>
+    </div>
+  </div>
+  <div style="max-width:860px;margin:0 auto;padding:3rem 2rem;">
+    <iframe class="airtable-embed" src="https://airtable.com/embed/appDR6SzNSPp5JGEj/pagU9Byjpnxd5Bz6j/form" frameborder="0" onmousewheel="" width="100%" height="533" style="background: transparent; border: 1px solid #ccc;"></iframe>
+  </div>
+</div>
+
 <!-- STICKY APPLY BAR -->
 <div class="sticky-apply-bar">
   <div class="bar-label">Now accepting applications for Summer 2026</div>
-  <span class="bar-cta" onclick="showPage('apply')">Apply Now →</span>
+  <span class="bar-cta" onclick="showPage('apply-form')">Apply Now →</span>
 </div>
 
 <!-- FOOTER -->
