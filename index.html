@@ -92,7 +92,7 @@
     }
     .page-hero-content { position: relative; z-index: 2; padding: 2rem 3rem; }
 
-    #home .home-hero { background: var(--navy); padding: 5rem 3rem 4rem; position: relative; overflow: hidden; }
+    #home .home-hero { background: linear-gradient(to right, rgba(14,34,64,0.92) 0%, rgba(14,34,64,0.72) 100%), url('schoolathens2.jpg') center 45% / cover var(--navy); padding: 5rem 3rem 4rem; position: relative; overflow: hidden; }
     #home .home-hero::before { content: 'Φ'; font-family: var(--serif); font-size: 40vw; color: rgba(255,255,255,0.02); position: absolute; right: -5vw; top: -10vw; line-height: 1; pointer-events: none; }
     #home .home-hero-inner { max-width: 800px; position: relative; z-index: 1; }
     #home .eyebrow { font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
@@ -107,10 +107,10 @@
     .btn-outline-white { border: 1px solid rgba(255,255,255,0.4); color: rgba(255,255,255,0.9); margin-left: 0.75rem; }
     .btn-outline-white:hover { border-color: var(--gold); color: var(--gold-lt); }
 
-    .home-info-strip { background: var(--navy-mid); display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; padding: 2rem 3rem; border-top: 1px solid rgba(255,255,255,0.07); }
+    .home-info-strip { background: var(--navy); display: flex; justify-content: center; gap: 4rem; flex-wrap: wrap; padding: 2rem 3rem; border-top: 1px solid rgba(255,255,255,0.07); }
     .info-pill { text-align: center; }
-    .info-pill .val { font-family: var(--sans); font-size: 0.92rem; font-weight: 600; color: #fff; display: block; line-height: 1; letter-spacing: 0.02em; }
-    .info-pill .key { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.35rem; }
+    .info-pill .val { font-family: var(--sans); font-size: 0.92rem; font-weight: 400; color: #fff; display: block; line-height: 1; letter-spacing: 0.02em; }
+    .info-pill .key { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-top: 0.35rem; font-weight: 400; }
 
     .home-body { max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; }
     .home-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
@@ -133,6 +133,7 @@
     .faculty-card { background: var(--warm); border-radius: 2px; overflow: hidden; border: 1px solid var(--border); }
     .faculty-card-photo { width: 100%; aspect-ratio: 2/3; overflow: hidden; background: var(--navy); position: relative; }
     .faculty-card-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .faculty-card-photo img.harrison-photo { object-position: center 34%; transform: scale(1.6); transform-origin: center 70%; }
     .faculty-card-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(160deg, var(--navy) 0%, var(--navy-mid) 100%); font-family: var(--serif); font-size: 3.5rem; color: rgba(201,168,76,0.25); letter-spacing: 0.05em; }
     .faculty-card-body { padding: 1.5rem 1.75rem; border-top: 3px solid var(--gold); }
     .faculty-card .fc-name { font-family: var(--serif); font-size: 1.2rem; font-weight: 600; color: var(--navy); }
@@ -170,12 +171,12 @@
     .accordion-a { display: none; padding: 0 0 1.25rem; font-size: 0.93rem; color: var(--slate); line-height: 1.85; }
     .accordion-a.open { display: block; }
 
-    body { padding-bottom: 68px; }
+    body { padding-bottom: 52px; }
 
-    .sticky-apply-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 500; background: #fff; border-top: 2px solid var(--navy); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 68px; box-shadow: 0 -4px 24px rgba(0,0,0,0.08); }
+    .sticky-apply-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 500; background: #fff; border-top: 2px solid var(--navy); display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 52px; box-shadow: 0 -4px 24px rgba(0,0,0,0.08); }
     .sticky-apply-bar .bar-label { font-family: var(--serif); font-size: 1rem; color: var(--navy); }
     .sticky-apply-bar .bar-label small { display: block; font-family: var(--sans); font-size: 0.72rem; color: var(--slate); letter-spacing: 0.04em; margin-top: 0.1rem; }
-    .sticky-apply-bar .bar-cta { background: var(--navy); color: #fff; padding: 0.65rem 1.6rem; font-family: var(--sans); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+    .sticky-apply-bar .bar-cta { background: var(--navy); color: #fff; padding: 0.45rem 1.25rem; font-family: var(--sans); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 2px; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
     .sticky-apply-bar .bar-cta:hover { background: var(--navy-lt); }
 
     footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 3.5rem 3rem; text-align: center; }
@@ -203,14 +204,14 @@
       .faculty-card { display: block; }
       .faculty-card-photo { aspect-ratio: 4/3; height: auto; width: 100%; min-width: unset; }
       .faculty-card-body { padding: 1.25rem 1.5rem; }
+      .faculty-card-photo img.harrison-photo { transform: none; object-position: center 34%; }
       #home .home-hero { padding: 3.5rem 1.25rem 3rem; }
       #home .home-hero .btn { display: block; width: fit-content; margin-left: 0; margin-top: 0.75rem; }
       .home-body { padding: 3rem 1.25rem; }
       .home-info-strip { gap: 2rem; padding: 2rem 1.5rem; }
       .page-hero { height: 220px; }
       .sticky-apply-bar { padding: 0 1.25rem; }
-      .sticky-apply-bar .bar-label { display: none; }
-      .sticky-apply-bar .bar-cta { width: 100%; text-align: center; }
+      .sticky-apply-bar .bar-label { font-size: 0.72rem; flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
       .deadline-table, .req-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .aid-highlight { flex-direction: column; gap: 1rem; padding: 1.75rem; }
       .content-body { max-width: 100%; }
@@ -280,7 +281,7 @@
     <div class="info-pill"><span class="val">Fully Funded</span><span class="key">No Tuition</span></div>
     <div class="info-pill"><span class="val">6-Week Intensive</span><span class="key">Jul 13 – Aug 23</span></div>
     <div class="info-pill"><span class="val">In Person</span><span class="key">Midtown Manhattan</span></div>
-    <div class="info-pill"><span class="val">Apply By May 20</span><span class="key">Final Deadline</span></div>
+    <div class="info-pill"><span class="val">Apply By May 15</span><span class="key">Final Deadline</span></div>
   </div>
   <div class="home-body">
     <div style="margin-bottom:0.5rem;font-family:var(--sans);font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.6rem;">
@@ -288,12 +289,13 @@
     </div>
     <h2>What is virtue? What does <em>a life well-lived</em> actually require?</h2>
     <div style="max-width:680px;">
-      <p>The Academy Fellowship is not a lecture series. It is a demanding, six-week intellectual community built on the conviction that the most important questions are not answered in a classroom — they are wrestled with, together, by people who refuse to take easy answers. Fellows are expected to ask not only what is true, but what such truths demand of us.</p>
+      <p>The Academy Fellowship is an intellectual community centered on the close study of the great wisdom traditions of the ancient world. Over six weeks, fellows examine enduring questions of virtue, truth, suffering, self-mastery, and the good life.</p>
       <div style="margin-top:2rem;">
         <span class="btn btn-gold" onclick="showPage('academics')" style="font-size:0.82rem;">View Curriculum →</span>
       </div>
     </div>
   </div>
+  <div style="border-top: 1px solid var(--border);"></div>
   <div class="inner-layout">
     <nav class="sidebar-nav">
       <a class="active" onclick="scrollToId('sec-about')">About the Fellowship</a>
@@ -303,7 +305,7 @@
     </nav>
     <div class="content-body">
       <div id="sec-about">
-        <h1>About the Fellowship</h1>
+        <h1 style="color: var(--ink);">About the Fellowship</h1>
         <p>The Academy Fellowship is a six-week philosophy program for exceptional high school students run by the New York Philosophical Society. Fellows read through the Great Books, meet weekly in extended seminar, and test their ideas through close dialogue with faculty and peers.</p>
         <p>The program takes place in Midtown Manhattan from July 13 through August 23, 2026. Fellows meet one to two times per week in person for extended seminar and are expected to complete 10–15 hours of independent reading to prepare for each session.</p>
         <p>The program is entirely free of charge. Students with financial need receive a stipend to cover materials and transportation.</p>
@@ -321,11 +323,11 @@
         <div class="faculty-grid">
           <div class="faculty-card">
             <div class="faculty-card-photo">
-              <img src="harrison.jpg" alt="Harrison Orlando" style="object-position: center 65%;" />
+              <img src="harrison.jpg" alt="Harrison Orlando" class="harrison-photo" />
             </div>
             <div class="faculty-card-body">
               <div class="fc-name">Harrison Orlando</div>
-              <div class="fc-role">Head of Admissions</div>
+              <div class="fc-role">Admissions Director</div>
               <p>Harrison studied Mathematics and Philosophy at the University of Chicago before beginning his career at Bridgewater Associates. Harrison leads the admissions and interview process for the Fellowship.</p>
             </div>
           </div>
@@ -335,7 +337,7 @@
             </div>
             <div class="faculty-card-body">
               <div class="fc-name">Cole Whetstone</div>
-              <div class="fc-role">Academic Director &amp; Lead Faculty</div>
+              <div class="fc-role">Academic Director</div>
               <p>After studying Classics at Harvard University, Cole received a full scholarship to study Ancient Philosophy at the University of Oxford, where he taught Ancient Greek for two years. His research in the philosophy of medicine has been published in academic journals. Cole co-founded NYPS and speaks nine languages.</p>
             </div>
           </div>
@@ -420,12 +422,12 @@
     <div class="content-body">
       <div id="sec-how">
         <h1>How to Apply</h1>
-        <p>Applications for the Summer 2026 Academy Fellowship open March 15, 2026 and close May 20, 2026. The application consists of two short essays, an official transcript, and a brief interview conducted by members of our admissions committee.</p>
+        <p>Applications for the Summer 2026 Academy Fellowship are now open and close May 15, 2026. The application consists of two short essays, an official transcript, and a brief interview conducted by members of our admissions committee.</p>
         <p>We use a holistic review process. Academic achievement matters, but we are equally interested in how you think and what you care about. There is no ideal background or profile.</p>
         <div class="apply-cta-box">
-          <h3>Applications Open March 15, 2026</h3>
-          <p>The application will be available at this link beginning March 15. Sign up below to be notified when it opens.</p>
-          <a class="btn btn-gold" href="mailto:fellowship@nyphilosophy.org?subject=Notify me when applications open">Get Notified →</a>
+          <h3>Applications Now Open</h3>
+          <p>Applications are open through May 15, 2026. To apply, contact us at the address below and we will send you the application materials.</p>
+          <a class="btn btn-gold" href="mailto:fellowship@nyphilosophy.org?subject=Application for Summer 2026">Apply Now →</a>
         </div>
         <hr />
       </div>
@@ -433,10 +435,10 @@
         <h2>Deadlines</h2>
         <table class="deadline-table">
           <tr><th>Milestone</th><th>Date</th></tr>
-          <tr><td><strong>Applications Open</strong></td><td>March 15, 2026</td></tr>
-          <tr><td><strong>Application Deadline</strong></td><td>May 20, 2026</td></tr>
-          <tr><td><strong>Interviews</strong></td><td>Late May – Early June 2026</td></tr>
-          <tr><td><strong>Decisions Released</strong></td><td>June 10, 2026</td></tr>
+          <tr><td><strong>Applications Now Open</strong></td><td>March 15, 2026</td></tr>
+          <tr><td><strong>Application Deadline</strong></td><td>May 15, 2026</td></tr>
+          <tr><td><strong>Interviews</strong></td><td>Through Early June 2026</td></tr>
+          <tr><td><strong>Decisions Released</strong></td><td>Rolling</td></tr>
           <tr><td><strong>Program Begins</strong></td><td>July 13, 2026</td></tr>
           <tr><td><strong>Program Ends</strong></td><td>August 23, 2026</td></tr>
         </table>
@@ -536,7 +538,7 @@
         </div>
         <div class="accordion-item">
           <div class="accordion-q" onclick="toggleAccordion(this)">How do I apply?<span class="icon">+</span></div>
-          <div class="accordion-a">Applications open March 15, 2026 and close May 20, 2026. The application consists of two short essays, an official transcript, and a brief interview conducted by members of our admissions committee. There is no application fee.</div>
+          <div class="accordion-a">Applications are now open and close May 15, 2026. The application consists of two short essays, an official transcript, and a brief interview conducted by members of our admissions committee. There is no application fee.</div>
         </div>
         <div class="accordion-item">
           <div class="accordion-q" onclick="toggleAccordion(this)">Who is eligible?<span class="icon">+</span></div>
@@ -583,9 +585,7 @@
 
 <!-- STICKY APPLY BAR -->
 <div class="sticky-apply-bar">
-  <div class="bar-label">The Academy Fellowship
-    <small>Summer 2026 · Applications Open</small>
-  </div>
+  <div class="bar-label">Now accepting applications for Summer 2026</div>
   <span class="bar-cta" onclick="showPage('apply')">Apply Now →</span>
 </div>
 
