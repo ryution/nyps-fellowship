@@ -28,38 +28,15 @@
     <ul>
       <li id="nav-home">
         <a href="/">Home</a>
-        <div class="dropdown">
-          <a href="/#sec-about">About the Fellowship</a>
-          <a href="/#sec-mission">Vision &amp; Mission</a>
-          <a href="/#sec-team">Meet the Faculty</a>
-          <a href="/#sec-contact">Contact</a>
-        </div>
       </li>
       <li id="nav-academics">
         <a href="/academics/">Academics</a>
-        <div class="dropdown">
-          <a href="/academics/#sec-program">Our Program</a>
-          <a href="/academics/#sec-curriculum">Core Reading</a>
-          <a href="/academics/#sec-seminar">Seminar Structure</a>
-        </div>
       </li>
       <li id="nav-apply" class="active">
         <a href="/how-to-apply/">How to Apply</a>
-        <div class="dropdown">
-          <a href="#sec-how">How to Apply</a>
-          <a href="#sec-deadlines">Deadlines</a>
-          <a href="#sec-eligibility">Eligibility</a>
-          <a href="#sec-components">Required Components</a>
-          <a href="#sec-admissions-q">Admissions Questions</a>
-        </div>
       </li>
       <li id="nav-tuition">
         <a href="/tuition/">Tuition &amp; Aid</a>
-        <div class="dropdown">
-          <a href="/tuition/#sec-tuition">Tuition</a>
-          <a href="/tuition/#sec-aid">Need-Based Financial Aid</a>
-          <a href="/tuition/#sec-stipend">Transportation Stipend</a>
-        </div>
       </li>
       <li id="nav-faq"><a href="/faq/">FAQ</a></li>
       <li id="nav-alumni"><a href="/alumni/">Alumni</a></li>
@@ -162,6 +139,13 @@
   const links = document.querySelectorAll('.sidebar-nav a');
   const sections = document.querySelectorAll('.content-body > div[id]');
   if (!links.length || !sections.length) return;
+  links.forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.getElementById(this.getAttribute('href').slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
