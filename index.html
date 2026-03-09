@@ -81,19 +81,12 @@
     .sidebar-nav a:hover { color: var(--navy); }
     .sidebar-nav a.active { color: var(--navy-lt); font-weight: 600; }
 
-    .page-hero { width: 100%; height: 340px; background: var(--navy-mid); position: relative; overflow: hidden; display: flex; align-items: flex-end; }
-    .page-hero-placeholder {
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1e3a5f 100%);
-    }
-    .page-hero-placeholder::after {
-      content: ''; position: absolute; inset: 0;
-      background-image: repeating-linear-gradient(45deg, rgba(201,168,76,0.04) 0px, rgba(201,168,76,0.04) 1px, transparent 1px, transparent 40px);
-    }
+    .page-hero { width: 100%; height: 340px; background: linear-gradient(to right, rgba(14,34,64,0.82) 0%, rgba(14,34,64,0.62) 100%), url('schoolathens2.jpg') center 45% / cover var(--navy); position: relative; overflow: hidden; display: flex; align-items: flex-end; }
+    .page-hero-placeholder { display: none; }
     .page-hero-content { position: relative; z-index: 2; padding: 2rem 3rem; }
 
-    #home .home-hero { background: linear-gradient(to right, rgba(14,34,64,0.92) 0%, rgba(14,34,64,0.72) 100%), url('schoolathens2.jpg') center 45% / cover var(--navy); padding: 5rem 3rem 4rem; position: relative; overflow: hidden; }
-    #home .home-hero::before { content: 'Φ'; font-family: var(--serif); font-size: 40vw; color: rgba(255,255,255,0.02); position: absolute; right: -5vw; top: -10vw; line-height: 1; pointer-events: none; }
+    #home .home-hero { background: linear-gradient(to right, rgba(14,34,64,0.75) 0%, rgba(14,34,64,0.52) 100%), url('schoolathens2.jpg') center 45% / cover var(--navy); padding: 7rem 3rem 4rem; position: relative; overflow: hidden; }
+    #home .home-hero::before { content: ''; }
     #home .home-hero-inner { max-width: 800px; position: relative; z-index: 1; }
     #home .eyebrow { font-family: var(--sans); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.6rem; }
     #home .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
@@ -180,8 +173,8 @@
     .sticky-apply-bar .bar-cta:hover { background: var(--navy-lt); }
 
     footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 3.5rem 3rem; text-align: center; }
-    .footer-title { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 0.25rem; }
-    .footer-title span { color: var(--gold-lt); }
+    .footer-title { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 0.25rem; display: block; }
+    .footer-title span { color: #fff; }
     footer p { font-size: 0.82rem; line-height: 1.9; }
     footer a { color: var(--gold-lt); }
     .footer-sep { width: 36px; height: 1px; background: var(--gold); margin: 1.25rem auto; }
@@ -271,7 +264,7 @@
 <div id="home" class="page active">
   <div class="home-hero">
     <div class="home-hero-inner">
-      <h1>The <em>Academy</em><br>Fellowship</h1>
+      <h1>The <em>Academy</em> Fellowship</h1>
       <p>A six-week philosophy program for exceptional high school students. Fellows read the Great Books, meet weekly in extended seminar, and test their ideas through close dialogue with faculty and peers.</p>
       <span class="btn btn-gold" onclick="showPage('apply')">Apply for Summer 2026</span>
       <span class="btn btn-outline-white" onclick="showPage('academics')">Explore the Program</span>
@@ -285,7 +278,7 @@
   </div>
   <div class="home-body">
     <div style="margin-bottom:0.5rem;font-family:var(--sans);font-size:0.72rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:0.6rem;">
-      <span style="width:24px;height:1px;background:var(--gold);display:inline-block;"></span>Inspired Minds
+      <span style="width:24px;height:1px;background:var(--gold);display:inline-block;"></span>Pursuing Wisdom
     </div>
     <h2>What is virtue? What does <em>a life well-lived</em> actually require?</h2>
     <div style="max-width:680px;">
@@ -306,15 +299,14 @@
     <div class="content-body">
       <div id="sec-about">
         <h1 style="color: var(--ink);">About the Fellowship</h1>
-        <p>The Academy Fellowship is a six-week philosophy program for exceptional high school students run by the New York Philosophical Society. Fellows read through the Great Books, meet weekly in extended seminar, and test their ideas through close dialogue with faculty and peers.</p>
-        <p>The program takes place in Midtown Manhattan from July 13 through August 23, 2026. Fellows meet one to two times per week in person for extended seminar and are expected to complete 10–15 hours of independent reading to prepare for each session.</p>
-        <p>The program is entirely free of charge. Students with financial need receive a stipend to cover materials and transportation.</p>
+        <p>Hosted by the New York Philosophical Society, the Academy Fellowship brings together a small cohort of serious students for six weeks of intensive study in Midtown Manhattan. Fellows meet in person one to two times per week for extended seminar and complete 10–15 hours of independent reading between sessions.</p>
+        <p>The program runs from July 13 through August 23, 2026. It is fully funded, and students with financial need also receive a stipend to help cover materials and transportation.</p>
         <hr />
       </div>
       <div id="sec-mission">
         <h2>Vision &amp; Mission</h2>
-        <p>We believe philosophy is not a subject. It is a practice — the oldest and most urgent one we have. Our mission is to recover that practice in the life of young New Yorkers, and to build a community where the examined life is not an aspiration but a living reality.</p>
-        <p>The New York Philosophical Society was founded on the conviction that meaning and human connection can be restored through the shared pursuit of wisdom. The Academy Fellowship is the most intensive expression of that conviction.</p>
+        <p>The Academy Fellowship exists to cultivate tomorrow's leaders through the formation of virtue and a renewed sense of purpose. We believe that education at its highest level should help answer not only how to succeed, but what one's life is for.</p>
+        <p>Our mission is to form students of unusual seriousness, depth, and character: students capable of thinking clearly, living deliberately, and leading with wisdom. As Viktor Frankl wrote, "Life is never made unbearable by circumstances, but only by lack of meaning and purpose."</p>
         <hr />
       </div>
       <div id="sec-team">
@@ -338,7 +330,7 @@
             <div class="faculty-card-body">
               <div class="fc-name">Cole Whetstone</div>
               <div class="fc-role">Academic Director</div>
-              <p>After studying Classics at Harvard University, Cole received a full scholarship to study Ancient Philosophy at the University of Oxford, where he taught Ancient Greek for two years. His research in the philosophy of medicine has been published in academic journals. Cole co-founded NYPS and speaks nine languages.</p>
+              <p>After studying Classics at Harvard University, Cole received a full scholarship to study Ancient Philosophy at the University of Oxford, where he taught Ancient Greek for two years after graduation. Cole is a founder of NYPS and speaks nine languages.</p>
             </div>
           </div>
         </div>
@@ -591,10 +583,9 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-title">New York <span>Philosophical Society</span></div>
-  <p>The Academy Fellowship · Summer 2026</p>
+  <a href="https://www.nyphilosophy.org" class="footer-title">New York <span>Philosophical Society</span></a>
   <div class="footer-sep"></div>
-  <p>New York Philosophical Society Inc. is a 501(c)(3) charity · EIN 33-1437268</p>
+  <p>Registered 501(c)(3) charity · EIN 33-1437268</p>
   <p style="margin-top:0.3rem;"><a href="mailto:fellowship@nyphilosophy.org">fellowship@nyphilosophy.org</a> · <a href="https://www.nyphilosophy.org">nyphilosophy.org</a></p>
   <div class="footer-links">
     <a onclick="showPage('home')">About</a>
